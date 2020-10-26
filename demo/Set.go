@@ -13,7 +13,7 @@ type Set struct {
 	sync.Mutex			//锁，实现并发安全
 }
 
-// 新建一个空集合
+// 添加一个元素
 func (s *Set)Add(item int){
 	s.Lock()
 	defer s.Unlock()
