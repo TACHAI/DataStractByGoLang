@@ -26,7 +26,7 @@ func (s *Set)Add(item int){
 // 移除一个元素
 func (s *Set)Remove(item int){
 	s.Lock()
-	defer s.Lock()
+	defer s.Unlock()
 
 	//集合没元素直接返回
 	if s.len==0{
@@ -90,11 +90,17 @@ func other(){
 	fmt.Println(unsafe.Sizeof(a))
 }
 
+func NewSet(cap int64) *Set {
+	temp:=make(map[int]struct{},cap)
+	return &Set{
+		m:temp,
+	}
+}
+
 func main()  {
 
 	//初始化一个容量为5的不可重复集合
-	//s:= new(Set)
-	s:= new(Set)
+	s:= NewSet(5)
 
 	s.Add(1)
 	s.Add(1)
